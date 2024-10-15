@@ -1,0 +1,38 @@
+{
+  "name": "jrpg_game_server",
+  "version": "1.0.0",
+  "description": "JRPG Game Server using TypeScript and Prisma",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "build": "tsc",
+    "postbuild": "mkdir dist\\wasm\\battle_system\\pkg && xcopy /E /I src\\wasm\\battle_system\\pkg dist\\wasm\\battle_system\\pkg",
+    "start": "node dist/server.js",
+    "prisma": "prisma"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@assemblyscript/loader": "^0.27.30",
+    "@prisma/client": "^5.20.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.2",
+    "nodemailer": "^6.9.15"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/jsonwebtoken": "^9.0.7",
+    "@types/node": "^22.7.5",
+    "@types/nodemailer": "^6.4.16",
+    "prisma": "^5.20.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.6.3"
+  }
+}

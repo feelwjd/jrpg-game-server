@@ -1,0 +1,46 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+import { config } from 'dotenv'
+config({ path: '.env' })
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  username  String    @unique
+  email     String    @unique
+  password  String
+  createdAt DateTime  @default(now())
+  characters Character[]
+}
+
+model Character {
+  id        Int       @id @default(autoincrement())
+  name      String
+  class     String
+  level     Int       @default(1)
+  experience Int      @default(0)
+  ownerId   Int
+  owner     User      @relation(fields: [ownerId], references: [id])
+  items     Item[]    // 추가된 필드
+  createdAt DateTime  @default(now())
+}
+
+model Item {
+  id         Int       @id @default(autoincrement())
+  name       String
+  type       String
+  characterId Int
+  character  Character @relation(fields: [characterId], references: [id])
+}
+
