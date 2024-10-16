@@ -4,6 +4,25 @@
 
 이 프로젝트는 JRPG 스타일의 게임 서버를 구축한 것으로, 플레이어가 캐릭터를 생성하고 관리하며, 전투에 참여하고 퀘스트를 수행할 수 있도록 설계되었습니다. 서버는 **Node.js**, **TypeScript**, **Prisma**를 기반으로 하며, **Rust**를 활용한 **WebAssembly(WASM)** 모듈을 통해 성능이 중요한 전투 로직을 처리합니다.
 
+## 프로젝트 구조
+```bash
+├─src
+    ├─controllers
+    ├─middleware
+    ├─prisma
+    ├─routes
+    ├─types
+    └─wasm
+        ├─battle_system
+        │  ├─pkg
+        │  └─src
+        │  
+        └─dreamticker_minigame
+            ├─pkg
+            └─src
+            
+```
+
 ## 주요 기능
 
 ### 1. 사용자 인증 및 관리
