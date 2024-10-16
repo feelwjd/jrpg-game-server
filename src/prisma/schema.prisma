@@ -3,8 +3,6 @@
 
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-import { config } from 'dotenv'
-config({ path: '.env' })
 
 datasource db {
   provider = "postgresql"
@@ -32,15 +30,16 @@ model Character {
   experience Int      @default(0)
   ownerId   Int
   owner     User      @relation(fields: [ownerId], references: [id])
-  items     Item[]    // 추가된 필드
+  items     Item[] 
   createdAt DateTime  @default(now())
 }
 
 model Item {
-  id         Int       @id @default(autoincrement())
-  name       String
-  type       String
+  id          Int      @id @default(autoincrement())
+  name        String
+  type        String   
+  equipped    Boolean   @default(false)  // 장착 여부
   characterId Int
-  character  Character @relation(fields: [characterId], references: [id])
+  character   Character @relation(fields: [characterId], references: [id])
 }
 
