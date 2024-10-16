@@ -23,15 +23,30 @@ model User {
 }
 
 model Character {
-  id        Int       @id @default(autoincrement())
-  name      String
-  class     String
-  level     Int       @default(1)
-  experience Int      @default(0)
-  ownerId   Int
-  owner     User      @relation(fields: [ownerId], references: [id])
-  items     Item[] 
+  id          Int     @id @default(autoincrement())
+  name        String
+  class       String
+  level       Int     @default(1)
+  experience  Int     @default(0)
+  speed       Int     @default(10)    // 캐릭터 속도
+  attack      Int     @default(5)     // 공격력
+  defense     Int     @default(3)     // 방어력
+  skills      Skill[]                 // 스킬
+  status      String?                 // 상태 이상 (중독, 기절 등)
+  inventory   Item[]
+  ownerId     Int
+  owner       User     @relation(fields: [ownerId], references: [id])
   createdAt DateTime  @default(now())
+}
+
+model Skill {
+  id           Int    @id @default(autoincrement())
+  name         String
+  effect       String  // 중독, 기절 등
+  power        Int     // 스킬의 공격력
+  cooldown     Int     // 스킬 사용 후 대기 시간
+  characterId  Int
+  character    Character @relation(fields: [characterId], references: [id])
 }
 
 model Item {
@@ -41,5 +56,6 @@ model Item {
   equipped    Boolean   @default(false)  // 장착 여부
   characterId Int
   character   Character @relation(fields: [characterId], references: [id])
+  createdAt DateTime  @default(now())
 }
 
